@@ -18,12 +18,16 @@ function App() {
       {/* Hamburger Menu and Links */}
       <div className="absolute top-4 right-4 md:top-8 md:right-8 flex items-center space-x-4">
         {/* Hamburger Icon for small screens */}
-        <div className="md:hidden">
+        <motion.div
+          className="md:hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="text-[#FFD700] focus:outline-none"
           >
-            {/* Icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-8 w-8"
@@ -39,11 +43,16 @@ function App() {
               />
             </svg>
           </button>
-        </div>
+        </motion.div>
 
         {/* Top-right links for medium and larger screens */}
-        <div className="hidden md:flex space-x-6 items-center">
-          {["Resume", "LinkedIn", "Instagram", "Gmail", "Portfolio"].map(
+        <motion.div
+          className="hidden md:flex space-x-6 items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          {["LinkedIn", "Instagram", "Gmail", "Portfolio"].map(
             (text, index) => (
               <a
                 key={index}
@@ -73,7 +82,7 @@ function App() {
           >
             About
           </button>
-        </div>
+        </motion.div>
       </div>
 
       {/* Dropdown Menu for small screens */}
@@ -134,7 +143,8 @@ function App() {
             transition={{ duration: 0.8 }}
           >
             <motion.h1
-              className="text-2xl md:text-4xl font-bold text-white"
+              className="text-2xl md:text-5xl font-bold text-white"
+              style={{ fontFamily: "MedievalSharp, cursive" }} // Applying the imported font
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1 }}
@@ -149,36 +159,64 @@ function App() {
       <AnimatePresence>
         {showAbout && (
           <motion.div
-            className="w-full h-full flex flex-col justify-start items-center p-6 md:p-10"
+            className="w-full h-full flex justify-center items-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <button
-              onClick={() => setShowAbout(false)}
-              className="absolute top-4 left-4 md:top-8 md:left-8 text-white text-sm md:text-base font-light hover:bg-[#FFD700] hover:text-black transition duration-300 rounded-full px-3 py-1 md:px-4 md:py-2"
+            <motion.div
+              className="relative max-w-3xl p-6 md:p-10 bg-opacity-70 bg-black rounded-lg text-center text-white px-4 md:px-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Back
-            </button>
-            <div className="text-center text-white px-4 md:px-6">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">About Me</h2>
-              <p className="text-base md:text-lg">
-                I am a detail-oriented architect with a strong foundation in CAD
-                and 3D modeling, committed to creating functional and beautiful
-                spaces. I enjoy blending creativity with technical precision to
-                bring design ideas to life.
-              </p>
-            </div>
+              <motion.button
+                onClick={() => setShowAbout(false)}
+                className="absolute top-4 left-4 md:top-8 md:left-8 text-white text-sm md:text-base font-light hover:bg-[#FFD700] hover:text-black transition duration-300 rounded-full px-3 py-1 md:px-4 md:py-2"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                Back
+              </motion.button>
+              <motion.h2
+                className="text-2xl md:text-3xl font-bold mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                About Me
+              </motion.h2>
+              <motion.p
+                className="text-base md:text-lg"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                From childhood, I was fascinated by buildings, always choosing
+                to draw them in school. I loved watching carpenters work and
+                seeing houses come together, even before I knew what
+                architecture was. When people asked me what I wanted to be, I’d
+                say “engineer” until I discovered, in ninth grade, that what I
+                truly loved was called architecture. That’s when my journey
+                began, turning a childhood passion into my life’s purpose. Now,
+                as I study architecture, I’m driven by a vision to create
+                sustainable buildings. My goal is to design homes that naturally
+                stay comfortable, without relying on air conditioning, using
+                passive design techniques that blend seamlessly with the
+                environment. This isn’t just a career; it’s the fulfillment of a
+                lifelong dream.
+              </motion.p>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
       <style jsx global>{`
-        @import url("https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap");
-        .font-courier-prime {
-          font-family: "Courier Prime", monospace;
-        }
+        @import url("https://fonts.googleapis.com/css2?family=Courier+Prime&family=Dancing+Script&display=swap");
       `}</style>
     </div>
   );
